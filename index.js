@@ -19,8 +19,16 @@ app.get("/",(request,response)=>{
 //api creation
 app.listen(port,(error)=>{
     if(!error){
-        console.log("Server running on port"+port)
+        console.log("Server running on port: "  +port)
     }else{
         console.log("Error: "+error)
+    }
+})
+
+//image storage
+const storage=multer.diskStorage({
+    destination:'./upload/images',
+    filename:(req,file,cb)=>{
+        return cb(null,`${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`)
     }
 })
