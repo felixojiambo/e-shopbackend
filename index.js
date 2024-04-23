@@ -1,5 +1,5 @@
 const port=4000;
-const expresss=require("express")
+const express=require("express")
 const app=express()
 const mongoose=require("mongoose")
 const jwt=require("jsonwebtoken")
@@ -8,3 +8,19 @@ const path=require("path")
 const cors=require("cors")
 app.use(express.json())
 app.use(cors())
+
+//database connection with mongodb
+mongoose.connect("mongodb://localhost:27017/ecom")
+
+app.get("/",(request,response)=>{
+    res.send("Express App is running on port 4000")
+
+})
+//api creation
+app.listen(port,(error)=>{
+    if(!error){
+        console.log("Server running on port"+port)
+    }else{
+        console.log("Error: "+error)
+    }
+})
