@@ -16,6 +16,17 @@ app.get("/",(request,response)=>{
     res.send("Express App is running on port 4000")
 
 })
+
+const upload=multer({storage:storage})
+//creating upload images
+app.use('/images',express.static('upload/images'))
+app.post("/upload",upload.single('product'),(req,res)=>{
+    res.json({
+        success:1,
+image_url:`http://localhost:${port}/images/${req.file.filename}`
+    })
+})
+
 //api creation
 app.listen(port,(error)=>{
     if(!error){
