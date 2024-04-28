@@ -22,12 +22,25 @@ const Product = mongoose.model("Product", {
   name: { type: String, required: true },
   image: { type: String, reuired: true },
   category: { type: String, required: true },
-  new_prices: { type: Number, required: true },
+  new_price: { type: Number, required: true },
   old_price: { type: Number, required: true },
   date: { type: Date, default: Date.now() },
   available: { type: boolean, default: true },
 });
-
+//Add product
+app.post("/addproduct", async (req, res) => {
+  const product = new Product({
+    id: req.body.id,
+    name: req.body.name,
+    category: req.body.category,
+    new_price: req.body.new_price,
+    old_price: req.body.old_price,
+  });
+  console.log(product);
+  await product.save();
+  console.log("Saved");
+  res.json({ success: true, name: req.body.name });
+});
 const upload = multer({ storage: storage });
 //creating upload images
 app.use("/images", express.static("upload/images"));
