@@ -1,17 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useEffect, useState } from "react";
 import "./ListProduct.css";
-import cross_icon from '../../assets/cross_icon.
-<ul class="pagination pagination-lg">
-  <li><a href="#">&laquo;</a></li>
-  <li><a href="#">1</a></li>
-  <li><a href="#">2</a></li>
-  <li><a href="#">3</a></li>
-  <li><a href="#">4</a></li>
-  <li><a href="#">5</a></li>
-  <li><a href="#">&raquo;</a></li>
-</ul>
-'
+import cross_icon from '../../assets/cross_icon.png'
 const ListProduct = () => {
   const [allproducts, setAllProducts] = useState([]);
   const fetchInfo = async () => {
