@@ -158,7 +158,7 @@ app.get('/popularinwomen',async(req,res)=>{
   res.send(popular_in_women);
 })
 //adding cart data endpoint
-app.post('/addtocart',async(req,res)=>{
+app.post('/addtocart',fetchUser,async(req,res)=>{
 console.log(req.body);
 
 })
