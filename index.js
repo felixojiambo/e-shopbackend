@@ -159,8 +159,10 @@ app.get('/popularinwomen',async(req,res)=>{
 })
 //adding cart data endpoint
 app.post('/addtocart',fetchUser,async(req,res)=>{
-console.log(req.body,req.user);
-
+let userData=await Users.findOne({_id:req.user.id});
+userData.cartData[req.body.itemId]+=1;
+await Users.findOneAndUpdate({_id:req.user.id},{cartData:userData.cartData});
+res.send("Added")
 })
 //create  middleware to fetch user
 const fetchUser=async (req,res,next)=>{
