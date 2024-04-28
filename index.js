@@ -15,6 +15,14 @@ mongoose.connect("mongodb://localhost:27017/ecom");
 app.get("/", (request, response) => {
   res.send("Express App is running on port 4000");
 });
+//api creation
+app.listen(port, (error) => {
+  if (!error) {
+    console.log("Server running on port: " + port);
+  } else {
+    console.log("Error: " + error);
+  }
+});
 
 //schema for creating producst
 const Product = mongoose.model("Product", {
@@ -55,12 +63,12 @@ app.post("/addproduct", async (req, res) => {
 app.post("/removeproducts", async (req, res) => {
   await Product.findOneAndDelete({ id: req.body.id });
   console.log("removed");
-  res.jsons({ success: true, name: req.body.name });
+  res.json({ success: true, name: req.body.name });
 });
 
 //getting all products
 app.get("/allproducts",async(req, res)=>{
-let producst=await Product.find({});
+let products=await Product.find({});
 console.log("All products fetched");
 res.send(products);
 })
@@ -74,14 +82,7 @@ app.post("/upload", upload.single("product"), (req, res) => {
   });
 });
 
-//api creation
-app.listen(port, (error) => {
-  if (!error) {
-    console.log("Server running on port: " + port);
-  } else {
-    console.log("Error: " + error);
-  }
-});
+
 
 //image storage
 const storage = multer.diskStorage({
