@@ -23,6 +23,16 @@ app.listen(port, (error) => {
     console.log("Error: " + error);
   }
 });
+//image storage
+const storage = multer.diskStorage({
+  destination: "./upload/images",
+  filename: (req, file, cb) => {
+    return cb(
+      null,
+      `${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`
+    );
+  },
+});
 
 //schema for creating producst
 const Product = mongoose.model("Product", {
@@ -33,7 +43,7 @@ const Product = mongoose.model("Product", {
   new_price: { type: Number, required: true },
   old_price: { type: Number, required: true },
   date: { type: Date, default: Date.now() },
-  available: { type: boolean, default: true },
+  available: { type: Boolean, default: true },
 });
 //Add product
 app.post("/addproduct", async (req, res) => {
@@ -84,13 +94,3 @@ app.post("/upload", upload.single("product"), (req, res) => {
 
 
 
-//image storage
-const storage = multer.diskStorage({
-  destination: "./upload/images",
-  filename: (req, file, cb) => {
-    return cb(
-      null,
-      `${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`
-    );
-  },
-});

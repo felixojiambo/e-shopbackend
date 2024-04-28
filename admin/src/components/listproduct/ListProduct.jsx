@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import "./ListProduct.css";
 import cross_icon from '../../assets/cross_icon.png'
+// eslint-disable-next-line no-unused-vars
 import { application } from "express";
 const ListProduct = () => {
   const [allproducts, setAllProducts] = useState([]);
@@ -25,6 +26,7 @@ const remove_product=async(id)=>{
     },
     body:JSON.stringify({id:id})
   })
+  await fetchInfo();
 }
 
   return (
