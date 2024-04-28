@@ -150,6 +150,14 @@ app.get('/newcollections',async(req,res)=>{
   console.log("New Collection Fetched");
   res.send(newcollection);
 })
+//creating endpoint for popular in women category
+app.get('/popularinwomen',async(req,res)=>{
+  let products=await Product.find({category:"women"});
+  let popular_in_women=products.slice(0,4);
+  console.log("Popular in women fetched");
+  res.send(popular_in_women);
+})
+
 
 //creating upload images
 app.use("/images", express.static("upload/images"));
