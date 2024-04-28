@@ -160,8 +160,23 @@ app.get('/popularinwomen',async(req,res)=>{
 //adding cart data endpoint
 app.post('/addtocart',async(req,res)=>{
 console.log(req.body);
-})
 
+})
+//create  middleware to fetch user
+const fetchUser=async (req,res,next)=>{
+const token=req.header('auth-token');
+if(!token){
+  res.status(401).send({errors:"Please authenticate using valid toke"});
+}else{
+  try{
+    const data=jwt.verify(token,'secret_ecom');
+    req.user=data.user;
+    next();
+  }catch (error){
+
+  }
+}
+}
 //creating upload images
 app.use("/images", express.static("upload/images"));
 app.post("/upload", upload.single("product"), (req, res) => {
