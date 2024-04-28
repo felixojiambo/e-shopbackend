@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import "./ListProduct.css";
 import cross_icon from '../../assets/cross_icon.png'
+import { application } from "express";
 const ListProduct = () => {
   const [allproducts, setAllProducts] = useState([]);
   const fetchInfo = async () => {
@@ -13,7 +14,19 @@ const ListProduct = () => {
   };
   useEffect(() => {
     fetchInfo();
-  }, []);
+  }, [])
+
+const remove_product=async(id)=>{
+  await fetch('http://localhost:4000/removeproduct',{
+    method:'POST',
+    headers:{
+      Accept:'application/json',
+      'Content-Type':'application/json',
+    },
+    body:JSON.stringify({id:id})
+  })
+}
+
   return (
     <div className="list-product">
       <h1>All Products List</h1>
@@ -42,7 +55,7 @@ const ListProduct = () => {
               <p>KES{product.old_price}</p>
               <p>KES{product.new_price}</p>
               <p>{product.category}</p>
-              <img className='listproduct-remove-icon' src={cross_icon} alt=" "/>
+              <img onClick={()=>{remove_product(product.id)}} className='listproduct-remove-icon' src={cross_icon} alt=" "/>
             </div>
           <hr />
           </>
