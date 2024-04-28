@@ -165,6 +165,13 @@ userData.cartData[req.body.itemId]+=1;
 await Users.findOneAndUpdate({_id:req.user.id},{cartData:userData.cartData});
 res.send("Added")
 })
+// get cart data on login
+app.post('/getcart',fetchUser,async(req,res)=>{
+  console.log("Get Cart");
+  let userData=await Users.findOne({_id:req.user.id});
+  res.json(userData.cartData);
+})
+
 //create  middleware to fetch user
 const fetchUser=async (req,res,next)=>{
 const token=req.header('auth-token');
