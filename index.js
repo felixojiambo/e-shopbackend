@@ -159,7 +159,7 @@ app.get('/popularinwomen',async(req,res)=>{
 })
 //adding cart data endpoint
 app.post('/addtocart',fetchUser,async(req,res)=>{
-console.log(req.body);
+console.log(req.body,req.user);
 
 })
 //create  middleware to fetch user
@@ -173,7 +173,7 @@ if(!token){
     req.user=data.user;
     next();
   }catch (error){
-
+   res.status(401).send({errors:"please autheticate using a valid token"})
   }
 }
 }
