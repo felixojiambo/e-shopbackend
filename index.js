@@ -57,6 +57,13 @@ app.post("/removeproducts", async (req, res) => {
   console.log("removed");
   res.jsons({ success: true, name: req.body.name });
 });
+
+//getting all products
+app.get("/allproducts",async(req, res)=>{
+let producst=await Product.find({});
+console.log("All products fetched");
+res.send(products);
+})
 const upload = multer({ storage: storage });
 //creating upload images
 app.use("/images", express.static("upload/images"));
@@ -66,7 +73,7 @@ app.post("/upload", upload.single("product"), (req, res) => {
     image_url: `http://localhost:${port}/images/${req.file.filename}`,
   });
 });
-//524
+
 //api creation
 app.listen(port, (error) => {
   if (!error) {
