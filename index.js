@@ -157,7 +157,10 @@ app.get('/popularinwomen',async(req,res)=>{
   console.log("Popular in women fetched");
   res.send(popular_in_women);
 })
-
+//adding cart data endpoint
+app.post('/addtocart',async(req,res)=>{
+console.log(req.body);
+})
 
 //creating upload images
 app.use("/images", express.static("upload/images"));
