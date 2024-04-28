@@ -83,6 +83,24 @@ console.log("All products fetched");
 res.send(products);
 })
 const upload = multer({ storage: storage });
+
+//schema model for user creation
+const users=mongoose.model('users',{
+
+  name:{
+    type:String,
+  },
+  email:{String,
+  unique:true,},
+  password:{
+    type:String,
+  },cartData:{
+    type:Object,
+  },date:{type:Date,default:Date.now,}
+}
+)
+
+
 //creating upload images
 app.use("/images", express.static("upload/images"));
 app.post("/upload", upload.single("product"), (req, res) => {
