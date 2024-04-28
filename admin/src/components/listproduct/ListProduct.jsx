@@ -28,7 +28,7 @@ const ListProduct = () => {
       <div className="listproduct-allproducts">
         <hr />
         {allproducts.map((product, index) => {
-          return (
+          return <>
             <div
               key={index}
               className="listproduct-format-main listproduct-format"
@@ -44,10 +44,12 @@ const ListProduct = () => {
               <p>{product.category}</p>
               <img className='listproduct-remove-icon' src={cross_icon} alt=" "/>
             </div>
-          );
+          <hr />
+          </>
         })}
       </div>
     </div>
+    
   );
 };
 
